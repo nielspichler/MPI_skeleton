@@ -21,8 +21,14 @@ class Object2:
         return self.value
 
 class Object3:
-    def __init__(self, object2):
-        self.name = "Object3"
+    def __init__(self, object2, rank = None):
+
+        self.rank = rank
+
+        if rank is not None:
+            self.name = "Object3_%d"%rank
+        else:
+            self.name = "Object3"
         self.value = 3
         self.object2 = object2
 
@@ -51,7 +57,7 @@ class Object3:
                     for i in range(8):
                         local_res.append(self.object2.compute_value(wait_time))
 
-                    res.append(local_res)
+                    res.append([self.rank, el1, el2, el3] + local_res)
 
                     # save dataset
                     iteration += 1
